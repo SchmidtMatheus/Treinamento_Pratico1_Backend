@@ -12,34 +12,37 @@ import lombok.Data;
 @Entity
 @Data
 
-@Table(name = "Employee")
+@Table(name = "employee")
 
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonProperty("_idEmployee")
-    private int idEmployee;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("_id")
+    private int id;
 
-    @Column(name = "client_employee", nullable = false)
+    @Column(name = "client", nullable = false)
     private int clientEmployee;
 
-    @Column(name = "name_employee", nullable = false)
+    @Column(name = "name", nullable = false)
     private String nameEmployee;
 
-    @Column(name = "national_identity_employee", nullable = false)
+    @Column(name = "national_identity", nullable = false)
     private String nationalIdentityEmployee;
 
-    @Column(name = "job_position_employee", nullable = true)
+    @Column(name = "job_position", nullable = true)
     private int jobPositionEmployee;
 
-    @Column(name = "active_employee", nullable = false)
+    @Column(name = "active", nullable = false)
     private boolean activeEmployee;
 
-    @Column(name = "salary_employee", nullable = false)
+    @Column(name = "salary", nullable = false)
     private int salaryEmployee;
 
-    @Column(name = "type_employee", nullable = false)
+    @Column(name = "type", nullable = false)
     private TypeEmployee typeEmployee;
+
+    @Column(name = "birthdate", nullable = false)
+    private java.time.LocalDate birthdateEmployee;
 
 }

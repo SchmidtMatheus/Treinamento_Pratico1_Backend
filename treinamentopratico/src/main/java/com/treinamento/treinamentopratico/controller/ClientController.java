@@ -2,7 +2,7 @@ package com.treinamento.treinamentopratico.controller;
 
 import java.util.List;
 import com.treinamento.treinamentopratico.model.Employee;
-import com.treinamento.treinamentopratico.repository.TreinamentoRepository;
+import com.treinamento.treinamentopratico.repository.EmployeeRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class ClientController {
 
-  private TreinamentoRepository treinamentoRepository;
+  private EmployeeRepository employeeRepository;
 
 
-  public ClientController(TreinamentoRepository treinamentoRepository) {
-    this.treinamentoRepository = treinamentoRepository;
+  public ClientController(EmployeeRepository employeeRepository) {
+    this.employeeRepository = employeeRepository;
 
   }
 
@@ -27,7 +27,7 @@ public class ClientController {
   @RequestMapping(method = RequestMethod.GET)
   public List<Employee> list() {
 
-    return treinamentoRepository.findAll();
+    return employeeRepository.findAll();
   }
 
 }
