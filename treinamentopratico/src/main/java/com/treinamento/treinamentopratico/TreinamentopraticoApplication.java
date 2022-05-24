@@ -1,8 +1,5 @@
 package com.treinamento.treinamentopratico;
 
-import java.time.LocalDate;
-import com.treinamento.treinamentopratico.model.Employee;
-import com.treinamento.treinamentopratico.model.TypeEmployee;
 import com.treinamento.treinamentopratico.repository.EmployeeRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,23 +15,25 @@ public class TreinamentopraticoApplication {
 	@Bean
 	CommandLineRunner initDatabase(EmployeeRepository employeeRepository){
 				return args -> {
-					employeeRepository.deleteAll();
+		/*			employeeRepository.deleteAll();
 
 
 					Employee e = new Employee();
-					e.setNameEmployee("Matheus");
-					e.setActiveEmployee(true);
-					e.setNationalIdentityEmployee("07487012905");
-					e.setTypeEmployee(TypeEmployee.INTERN);
-					e.setSalaryEmployee(1000);
-					e.setBirthdateEmployee(LocalDate.ofEpochDay(1998-17-11));
-					e.setClientEmployee(1);
+					e.setName("Matheus");
+					e.setActive(true);
+					e.setNationalIdentity("07487012905");
+					e.setType(TypeEmployee.INTERN);
+					e.setSalary(1000);
+					e.setBirthdate(LocalDate.of(1998,11,17));
+					e.setClientId(1);
 
 
-				employeeRepository.save(e);
+				employeeRepository.save(e);*/
 
 				};
 
 	}
+	}
 
-}
+
+

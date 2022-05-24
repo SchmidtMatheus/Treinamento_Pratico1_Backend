@@ -5,20 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
 
-public class Job_position {
+@Table(name = "job_position")
+public class JobPosition {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @JsonProperty("_id")
-  private int idJobPosition;
+  private int id;
 
   @Column(name = "name", nullable = false)
-  private int nameJobPosition;
+  private String name;
 
 }

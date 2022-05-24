@@ -1,4 +1,4 @@
-package com.treinamento.treinamentopratico.model;
+package com.treinamento.treinamentopratico.model.enums;
 
 public enum TypeEmployee {
   EMPLOYEE,

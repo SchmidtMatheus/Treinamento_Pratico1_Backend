@@ -10,15 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.treinamento.treinamentopratico.model.enums.TypeEmployee;
+import com.treinamento.treinamentopratico.model.enums.LeaveTypeEmployeeLeave;
+import com.treinamento.treinamentopratico.model.enums.TypeEmployeeLeave;
 import lombok.Data;
 
 @Entity
 @Data
 
-@Table(name = "employee")
+@Table(name = "employee_leave")
 
-public class Employee {
+public class EmployeeLeave {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,30 +28,27 @@ public class Employee {
 //  @Column(name = "client_id", nullable = false)
 //  private int clientId;
 
-  @Column(name = "name", nullable = false)
-  private String name;
+//  @Column(name = "employee_id", nullable = false)
+// private int employeeId;
 
-  @Column(name = "national_identity", nullable = false)
-  private String nationalIdentity;
+  @Column(name = "leave_date", nullable = false)
+  private Date leaveDate;
 
-//  @Column(name = "job_position", nullable = false)
-//  private int jobPositionID;
+  @Column(name = "number_days")
+  private int numberDays;
 
-  @Column(name = "active", nullable = false)
-  private boolean active;
+  @Column(name = "return_date")
+  private Date returnDate;
 
-  @Column(name = "salary", nullable = false)
-  private float salary;
+  @Column(name = "type")
+  private TypeEmployeeLeave type;
 
-  @Column(name = "type", nullable = false)
-  private TypeEmployee type;
-
-  @Column(name = "birthdate", nullable = false)
-  private Date birthdate;
+  @Column(name = "leave_type")
+  private LeaveTypeEmployeeLeave leaveType;
 
   @OneToOne(cascade= CascadeType.MERGE)
-  @JoinColumn(name = "job_Position",nullable=false)
-  private JobPosition jobPosition;
+  @JoinColumn(name = "employee_id",nullable=false)
+  private Employee employee;
 
   @OneToOne(cascade= CascadeType.MERGE)
   @JoinColumn(name = "client_id",nullable=false)
