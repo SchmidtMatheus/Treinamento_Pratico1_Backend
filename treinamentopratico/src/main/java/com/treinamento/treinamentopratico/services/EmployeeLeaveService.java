@@ -27,13 +27,25 @@ public class EmployeeLeaveService {
   }
 
   @Transactional
-  public EmployeeLeave save(EmployeeLeave employeeLeave) {
+  public EmployeeLeave save(EmployeeLeave employeeLeave) throws IllegalArgumentException{
     // validate before save
     if (LeaveTypeEmployeeLeave.CONTRIBUTORS_DEATH.equals(employeeLeave.getLeaveType())
         || LeaveTypeEmployeeLeave.TERMINATION.equals(employeeLeave.getLeaveType())) {
 
+      Integer countEmployeeId = employeeLeaveRepository.countByEmployeeIdAndTerminationsType(employeeLeave.getEmployee().getId());
+
+      if (countEmployeeId > 0) {
+   //     ResponseEntity.badRequest().build();
+   //     return ResponseEntity.badRequest().build();
+        IllegalArgumentException error = new IllegalArgumentException("400 - Bad Request");
+        throw error;
+      } else {
+        ResponseEntity.accepted().build();
+        return employeeLeaveRepository.save(employeeLeave);
+      }
+    } else {
+      return employeeLeaveRepository.save(employeeLeave);
     }
-    return employeeLeaveRepository.save(employeeLeave);
   }
 
   public ResponseEntity deleteById(Integer id) {

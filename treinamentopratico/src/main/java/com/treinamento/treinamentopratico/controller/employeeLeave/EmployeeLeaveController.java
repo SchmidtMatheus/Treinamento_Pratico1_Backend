@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.treinamento.treinamentopratico.model.EmployeeLeave;
 import com.treinamento.treinamentopratico.services.EmployeeLeaveService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,9 +46,14 @@ public class EmployeeLeaveController {
   }
 
   @PostMapping("/create")
-  public EmployeeLeave create(@RequestBody EmployeeLeaveRequest employeeLeaveRequest) {
+  public ResponseEntity create(@RequestBody EmployeeLeaveRequest employeeLeaveRequest) {
     EmployeeLeave employeeLeave = EmployeeLeaveMapper.toEntity(employeeLeaveRequest);
-    return employeeLeaveService.save(employeeLeave);
+    try {
+      employeeLeaveService.save(employeeLeave);
+    }catch (IllegalArgumentException e){
+      return ResponseEntity.badRequest().body(e);
+    }
+    return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
   @DeleteMapping("/delete/{id}")
