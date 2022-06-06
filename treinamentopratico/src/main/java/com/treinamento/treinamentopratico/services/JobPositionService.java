@@ -1,8 +1,8 @@
 package com.treinamento.treinamentopratico.services;
 
 import java.util.List;
-import com.treinamento.treinamentopratico.model.JobPosition;
-import com.treinamento.treinamentopratico.repository.JobPositionRepository;
+import com.treinamento.treinamentopratico.models.JobPosition;
+import com.treinamento.treinamentopratico.repositories.JobPositionRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

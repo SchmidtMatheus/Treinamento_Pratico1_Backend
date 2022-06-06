@@ -1,8 +1,8 @@
 package com.treinamento.treinamentopratico.services;
 
 import java.util.List;
-import com.treinamento.treinamentopratico.model.Client;
-import com.treinamento.treinamentopratico.repository.ClientRepository;
+import com.treinamento.treinamentopratico.models.Client;
+import com.treinamento.treinamentopratico.repositories.ClientRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
