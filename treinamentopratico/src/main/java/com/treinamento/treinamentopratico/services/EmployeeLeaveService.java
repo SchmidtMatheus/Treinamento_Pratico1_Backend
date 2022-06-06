@@ -1,7 +1,7 @@
 package com.treinamento.treinamentopratico.services;
 
-import java.sql.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import com.treinamento.treinamentopratico.exceptions.DeathOrTerminationException;
 import com.treinamento.treinamentopratico.exceptions.LeaveDaysException;
 import com.treinamento.treinamentopratico.exceptions.NotFoundIdException;
@@ -71,27 +71,22 @@ public class EmployeeLeaveService {
       final long dateToNumber = 86400000L;
       final int maternityNumberDays = 180;
       final int paternityNumberDays = 20;
-      final long maternityReturnDate = (
-          (((employeeLeave.getLeaveDate().getTime()) / dateToNumber) + maternityNumberDays + 1)
-              * (dateToNumber));
-      final long paternityReturnDate = (
-          (((employeeLeave.getLeaveDate().getTime()) / dateToNumber) + paternityNumberDays + 1)
-              * (dateToNumber));
+      long timeDiff = Math.abs(
+          employeeLeave.getReturnDate().getTime() - employeeLeave.getLeaveDate().getTime());
+      long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
 
       if (LeaveTypeEmployeeLeave.MATERNITY_LEAVE.equals(employeeLeave.getLeaveType())) {
 
-        if (!(employeeLeave.getNumberDays() == maternityNumberDays)
-            || !(employeeLeave.getReturnDate()
-            .equals(new Date(maternityReturnDate)))) {
+        if (!(employeeLeave.getNumberDays() == maternityNumberDays) || !(
+            daysDiff == maternityNumberDays)) {
           throw new LeaveDaysException(
               "O campo \"Tempo afastado\" deve ter o valor " + maternityNumberDays
                   + " e o valor de \"Data de retorno\" precisa ser condizente");
         }
 
       } else if (LeaveTypeEmployeeLeave.PATERNITY_LEAVE.equals(employeeLeave.getLeaveType())) {
-        if (!(employeeLeave.getNumberDays() == paternityNumberDays)
-            || !(employeeLeave.getReturnDate()
-            .equals(new Date(paternityReturnDate)))) {
+        if (!(employeeLeave.getNumberDays() == maternityNumberDays) || !(
+            daysDiff == paternityNumberDays)) {
           throw new LeaveDaysException(
               "O campo \"Tempo afastado\" deve ter o valor " + paternityNumberDays
                   + " e o valor de \"Data de retorno\" precisa ser condizente");
@@ -108,7 +103,7 @@ public class EmployeeLeaveService {
       if (countEmployeeId > 0) {
         throw new DeathOrTerminationException(
             "O funcionário " + employeeLeave.getEmployee().getName()
-                + " já possui um registro do tipo: " + employeeLeave.getLeaveType()
+                + " já possui um registro do tipo " + employeeLeave.getLeaveType()
                 + " e não permite novos afastamentos"
         );
       } else {
